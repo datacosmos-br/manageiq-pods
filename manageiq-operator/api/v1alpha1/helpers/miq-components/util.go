@@ -206,7 +206,7 @@ func addOrUpdateVolume(volumes []corev1.Volume, volume corev1.Volume) []corev1.V
 func DefaultSecurityContext() *corev1.SecurityContext {
 	dropCapability := []corev1.Capability{"ALL"}
 	varFalse := false
-	varTrue := true
+	varTrue := false
 	sc := &corev1.SecurityContext{
 		AllowPrivilegeEscalation: &varFalse,
 		Privileged:               &varFalse,

@@ -1,0 +1,7 @@
+---
+product_name:      manageiq
+repos:
+  ref:             master
+  manageiq:
+    url:           https://github.com/datacosmos-br/manageiq/
+    ref:           quinteros-local
