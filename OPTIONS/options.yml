@@ -1,0 +1,7 @@
+---
+product_name:      manageiq
+repos:
+  ref:             radjabov
+  manageiq:
+    url:           https://github.com/datacosmos-br/manageiq/
+    ref:           radjabov-local

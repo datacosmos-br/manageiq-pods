@@ -110,10 +110,10 @@ func (r *ManageIQReconciler) Reconcile(ctx context.Context, request ctrl.Request
 		logger.Info("Skipping reconcile of the operator pod; not running in a cluster.")
 	}
 
-	logger.Info("Reconciling the NetworkPolicies...")
-	if e := r.generateNetworkPolicies(miqInstance); e != nil {
-		return reconcile.Result{}, e
-	}
+	// logger.Info("Reconciling the NetworkPolicies...")
+	// if e := r.generateNetworkPolicies(miqInstance); e != nil {
+	// 	return reconcile.Result{}, e
+	// }
 	logger.Info("Reconciling the Secrets...")
 	if e := r.generateSecrets(miqInstance); e != nil {
 		return reconcile.Result{}, e

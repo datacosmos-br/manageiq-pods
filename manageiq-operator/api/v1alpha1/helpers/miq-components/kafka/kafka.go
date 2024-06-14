@@ -3,6 +3,8 @@ package miqkafka
 import (
 	"bytes"
 	"context"
+	"strconv"
+
 	miqv1alpha1 "github.com/ManageIQ/manageiq-pods/manageiq-operator/api/v1alpha1"
 	miqtool "github.com/ManageIQ/manageiq-pods/manageiq-operator/api/v1alpha1/helpers/miq-components"
 	miqutilsv1alpha1 "github.com/ManageIQ/manageiq-pods/manageiq-operator/api/v1alpha1/miqutils"
@@ -16,7 +18,6 @@ import (
 	"k8s.io/client-go/util/retry"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
-	"strconv"
 )
 
 func KafkaCASecret(cr *miqv1alpha1.ManageIQ, client client.Client, scheme *runtime.Scheme, secretType string) (*corev1.Secret, controllerutil.MutateFn) {
@@ -198,7 +199,7 @@ func KafkaClusterSpec() map[string]interface{} {
 			"template": map[string]interface{}{
 				"pod": map[string]interface{}{
 					"securityContext": map[string]interface{}{
-						"runAsNonRoot": true,
+						"runAsNonRoot": false,
 					},
 				},
 				"kafkaContainer": map[string]interface{}{
@@ -209,7 +210,7 @@ func KafkaClusterSpec() map[string]interface{} {
 						},
 						"privileged":             false,
 						"readOnlyRootFilesystem": false,
-						"runAsNonRoot":           true,
+						"runAsNonRoot":           false,
 					},
 				},
 			},
@@ -230,7 +231,7 @@ func KafkaClusterSpec() map[string]interface{} {
 			"template": map[string]interface{}{
 				"pod": map[string]interface{}{
 					"securityContext": map[string]interface{}{
-						"runAsNonRoot": true,
+						"runAsNonRoot": false,
 					},
 				},
 				"zookeeperContainer": map[string]interface{}{
@@ -241,7 +242,7 @@ func KafkaClusterSpec() map[string]interface{} {
 						},
 						"privileged":             false,
 						"readOnlyRootFilesystem": false,
-						"runAsNonRoot":           true,
+						"runAsNonRoot":           false,
 					},
 				},
 			},
@@ -258,7 +259,7 @@ func KafkaClusterSpec() map[string]interface{} {
 			"template": map[string]interface{}{
 				"pod": map[string]interface{}{
 					"securityContext": map[string]interface{}{
-						"runAsNonRoot": true,
+						"runAsNonRoot": false,
 					},
 				},
 				"topicOperatorContainer": map[string]interface{}{
@@ -269,7 +270,7 @@ func KafkaClusterSpec() map[string]interface{} {
 						},
 						"privileged":             false,
 						"readOnlyRootFilesystem": false,
-						"runAsNonRoot":           true,
+						"runAsNonRoot":           false,
 					},
 				},
 				"userOperatorContainer": map[string]interface{}{
@@ -280,7 +281,7 @@ func KafkaClusterSpec() map[string]interface{} {
 						},
 						"privileged":             false,
 						"readOnlyRootFilesystem": false,
-						"runAsNonRoot":           true,
+						"runAsNonRoot":           false,
 					},
 				},
 				"tlsSidecarContainer": map[string]interface{}{
@@ -291,7 +292,7 @@ func KafkaClusterSpec() map[string]interface{} {
 						},
 						"privileged":             false,
 						"readOnlyRootFilesystem": false,
-						"runAsNonRoot":           true,
+						"runAsNonRoot":           false,
 					},
 				},
 			},
