@@ -1,8 +1,8 @@
-ARG FROM_REPO=docker.io/manageiq
-ARG FROM_TAG=latest
+ARG FROM_REPO=gru.ocir.io/grq1iurfepyg/manageiq
+ARG FROM_TAG=latest-quinteros
 
 # alias stage for rpms
-FROM gru.ocir.io/grq1iurfepyg/manageiq-rpms:${FROM_TAG} as rpms
+FROM ${FROM_REPO}/manageiq-rpms:${FROM_TAG} as rpms
 
 ################################################################################
 

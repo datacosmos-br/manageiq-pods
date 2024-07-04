@@ -1,6 +1,8 @@
 
+ARG FROM_REPO=gru.ocir.io/grq1iurfepyg/manageiq
+ARG FROM_TAG=latest-quinteros
 
-FROM gru.ocir.io/grq1iurfepyg/manageiq-base:edicao-giovanni AS vddk
+FROM ${FROM_REPO}/manageiq-base:${FROM_TAG} AS vddk
 
 COPY container-assets/ /vddk/
 
