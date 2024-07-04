@@ -1,5 +1,5 @@
-ARG FROM_REPO=docker.io/manageiq
-ARG FROM_TAG=latest-radjabov
+ARG FROM_REPO=gru.ocir.io/grq1iurfepyg/manageiq-base
+ARG FROM_TAG=edicao-giovanni
 
 FROM ${FROM_REPO}/manageiq-base:${FROM_TAG} AS vddk
 
@@ -20,5 +20,6 @@ COPY container-assets/manageiq_liveness_check /usr/local/bin
 COPY --from=vddk /vddk/vmware-vix-disklib-distrib/ /usr/lib/vmware-vix-disklib/
 COPY container-assets/install-vmware-vddk /tmp/
 RUN /tmp/install-vmware-vddk
+
 
 CMD ["entrypoint"]

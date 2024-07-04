@@ -2,7 +2,7 @@ ARG FROM_REPO=docker.io/manageiq
 ARG FROM_TAG=latest
 
 # alias stage for rpms
-FROM ${FROM_REPO}/manageiq-rpms:${FROM_TAG} as rpms
+FROM gru.ocir.io/grq1iurfepyg/manageiq-rpms:${FROM_TAG} as rpms
 
 ################################################################################
 
@@ -15,6 +15,9 @@ ARG RPM_PREFIX=manageiq
 ENV TERM=xterm \
     CONTAINER=true \
     APP_ROOT=/var/www/miq/vmdb
+RUN groupadd -g 1001 appgroup && useradd -u 1001 -g appgroup appuser
+
+
 
 LABEL name="manageiq-base" \
       summary="ManageIQ base application image" \
@@ -28,8 +31,8 @@ LABEL name="manageiq-base" \
 # Force the sticky bit on /tmp - https://bugzilla.redhat.com/show_bug.cgi?id=2138434
 RUN chmod +t /tmp
 
-RUN chmod -R g+w /etc/pki/ca-trust && \
-    chmod -R g+w /usr/share/pki/ca-trust-legacy
+RUN chmod -R a+rwx /etc/pki/ca-trust && \
+    chmod -R a+rwx /usr/share/pki/ca-trust-legacy
 
 # Install dumb-init to be used as the entrypoint
 RUN ARCH=$(uname -m) && \
@@ -63,9 +66,9 @@ RUN --mount=type=bind,from=rpms,source=/tmp/rpms,target=/tmp/rpms \
       python3-devel && \
     clean_dnf_rpm && \
     chown manageiq:root /home/manageiq && \
-    chmod -R g=u /home/manageiq && \
+    chmod -R a+rwx /home/manageiq && \
     chgrp -R 0 $APP_ROOT && \
-    chmod -R g=u $APP_ROOT
+    chmod -R a+rwx $APP_ROOT
 
 # Add in the container_env file now that the APP_ROOT is created from the RPM
 ADD container-assets/container_env ${APP_ROOT}/
@@ -75,5 +78,9 @@ RUN --mount=type=bind,from=rpms,source=/tmp/rpms,target=/tmp/rpms \
     source /etc/default/evm && \
     /usr/bin/generate_rpm_manifest.sh && \
     clean_dnf_rpm
+
+RUN chown -R 1001:1001 /var/run/httpd /var/log/httpd /etc/pki/ca-trust
+RUN chmod a+rwx /etc
+RUN chmod a+rwx /var
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--single-child", "--"]

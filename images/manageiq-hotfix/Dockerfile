@@ -1,5 +1,5 @@
-ARG FROM_REPO=docker.io/manageiq
-ARG FROM_TAG=latest-radjabov
+ARG FROM_REPO=gru.ocir.io/grq1iurfepyg/manageiq-base
+ARG FROM_TAG=edicao-giovanni
 ARG FROM_IMAGE=${FROM_REPO}/manageiq-base:${FROM_TAG}
 
 FROM ${FROM_IMAGE}
