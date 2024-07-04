@@ -1,7 +1,6 @@
-ARG FROM_REPO=gru.ocir.io/grq1iurfepyg/manageiq-base
-ARG FROM_TAG=edicao-giovanni
 
-FROM ${FROM_REPO}/manageiq-base:${FROM_TAG} AS vddk
+
+FROM gru.ocir.io/grq1iurfepyg/manageiq-base:edicao-giovanni AS vddk
 
 COPY container-assets/ /vddk/
 
@@ -9,7 +8,7 @@ RUN /vddk/extract-vmware-vddk
 
 ################################################################################
 
-FROM ${FROM_REPO}/manageiq-base:${FROM_TAG}
+FROM gru.ocir.io/grq1iurfepyg/manageiq-base:edicao-giovanni
 
 LABEL name="manageiq-base-worker" \
       summary="ManageIQ Worker Image"

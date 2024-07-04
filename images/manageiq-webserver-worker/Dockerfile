@@ -1,8 +1,8 @@
-ARG FROM_REPO=gru.ocir.io/grq1iurfepyg/manageiq-base
+ARG FROM_REPO=docker.io/manageiq
 ARG FROM_TAG=latest-radjabov
 
 # alias stage for rpms
-FROM ${FROM_REPO}/manageiq-rpms:${FROM_TAG} as rpms
+FROM gru.ocir.io/grq1iurfepyg/manageiq-rpms:latest as rpms
 
 ###############################################################################
 
@@ -41,5 +41,4 @@ RUN --mount=type=bind,from=rpms,source=/tmp/rpms,target=/tmp/rpms \
 EXPOSE 3000
 EXPOSE 4000
 
-RUN chmod -R a+rwx 1001:1001 /service-worker-entrypoint
 CMD ["service-worker-entrypoint"]

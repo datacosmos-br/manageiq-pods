@@ -1,7 +1,6 @@
-ARG FROM_REPO=docker.io/manageiq
-ARG FROM_TAG=latest-radjabov
 
-FROM ${FROM_REPO}/manageiq-webserver-worker:${FROM_TAG}
+
+FROM gru.ocir.io/grq1iurfepyg/manageiq-webserver-worker:latest
 
 LABEL name="manageiq-ui-worker" \
       summary="ManageIQ user interface worker image"
