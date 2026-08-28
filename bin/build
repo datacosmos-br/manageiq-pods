@@ -39,7 +39,7 @@ if [ -n "$REBUILD_RPM" ]; then
     options+=" -v $PWD/$RPM_BUILD_OPTIONS:/root/OPTIONS"
   fi
 
-  $CONTAINER_COMMAND pull $RPM_BUILD_IMAGE
+#  $CONTAINER_COMMAND pull $RPM_BUILD_IMAGE
   cmd="$CONTAINER_COMMAND run -it --rm $options $RPM_BUILD_IMAGE build"
   echo "Building RPMs locally: $cmd"
   $cmd
